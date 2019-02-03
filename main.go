@@ -29,6 +29,7 @@ func main() {
 	}
 
 	app.Commands = []cli.Command{
+		PipeCommand,
 		CompileCommand,
 	}
 
@@ -114,4 +115,27 @@ var CompileCommand = cli.Command{
 			Usage: "",
 		},
 	},
+}
+
+func Pipe(c *cli.Context) error {
+	db, err := LoadDB(c)
+	if err != nil {
+		return err
+	}
+
+	scanner := bufio.NewScanner(os.Stdin)
+	for scanner.Scan() {
+		entry := strings.ToUpper(strings.TrimSpace(scanner.Text()))
+		fmt.Printf("%s\t%f\n", entry, db.Get(entry))
+	}
+
+	return nil
+}
+
+var PipeCommand = cli.Command{
+	Name:   "pipe",
+	Action: Pipe,
+	Usage:  "",
+
+	Flags: []cli.Flag{},
 }
