@@ -22,9 +22,10 @@ func main() {
 
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
-			Name:  "worddb",
-			Value: "",
-			Usage: "",
+			Name:   "worddb",
+			Value:  "",
+			Usage:  "",
+			EnvVar: "WORDPROB_WORDDB",
 		},
 	}
 
