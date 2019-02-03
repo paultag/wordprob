@@ -126,7 +126,7 @@ func Pipe(c *cli.Context) error {
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
 		entry := strings.ToUpper(strings.TrimSpace(scanner.Text()))
-		fmt.Printf("%s\t%f\n", entry, db.Get(entry))
+		fmt.Printf("%f\t%s\n", db.Get(entry), entry)
 	}
 
 	return nil
